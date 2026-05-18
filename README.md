@@ -1,17 +1,16 @@
 # AI Chatbot Demo
 
-Chatbot AI conversazionale per la ricerca di locali vegani e vegan-friendly in Puglia. Utilizza Mistral AI come modello linguistico e un database strutturato in formato CSV come fonte dati.
+Interfaccia chat conversazionale in React/TypeScript con suggerimenti dinamici, supporto multilingua e integrazione Mistral AI.
 
 ## Requisiti
 
-- Node.js (versione 18 o superiore)
+- Node.js 18+
 - npm
-- API Key di Mistral AI
-- Git
+- API key Mistral AI
 
 ## Installazione
 
-1. Clona il repository:
+1. Clona il repository e entra nella cartella:
    ```bash
    git clone <url-repository>
    cd ai-chatbot-demo
@@ -22,62 +21,36 @@ Chatbot AI conversazionale per la ricerca di locali vegani e vegan-friendly in P
    npm install
    ```
 
-3. Crea un file `.env.local` nella root del progetto e aggiungi le variabili d'ambiente:
+3. Crea il file `.env.local` copiando `.env.example`:
+   ```bash
+   cp .env.example .env.local
    ```
+
+4. Compila le variabili:
+   ```bash
    MISTRAL_API_KEY=la_tua_chiave_mistral
-   VITE_GOOGLE_MAPS_API_KEY=la_tua_chiave_google_maps
-   VITE_DATA_SHEET_ID=id_del_foglio_google_sheets
-   VITE_DATA_SHEET_GID=0
+   SUPABASE_URL=https://<project-ref>.supabase.co
+   SUPABASE_SERVICE_ROLE_KEY=la_tua_service_role_key
+   VITE_GOOGLE_MAPS_API_KEY=chiave_google_maps_opzionale
    ```
 
-   > **Come ottenere le API Key:**
-   >
-   > **Mistral API (obbligatoria):**
-   > - Vai su [console.mistral.ai](https://console.mistral.ai/)
-   > - Crea un account o accedi
-   > - Vai su "API Keys" e crea una nuova chiave
-   > - Copia la chiave e incollala nel file `.env.local`
-   >
-   > **Google Maps API (opzionale ma consigliata):**
-   > - Vai su [Google Cloud Console](https://console.cloud.google.com/google/maps-apis)
-   > - Crea un nuovo progetto o selezionane uno esistente
-   > - Abilita "Maps Embed API"
-   > - Vai su "Credenziali" e crea una nuova API key
-   > - Copia la chiave e incollala nel file `.env.local`
-
-4. Avvia l'applicazione in modalità sviluppo:
+5. Avvia in sviluppo:
    ```bash
    npm run dev
    ```
-   L'app sarà disponibile su [http://localhost:3000](http://localhost:3000)
 
-## Funzionalità
+## Sicurezza API key
 
-- Ricerca intelligente di locali vegani e vegan-friendly
-- Suggerimenti personalizzati basati su preferenze e zona
-- Anteprime Google Maps integrate per ogni locale
-- Pianificazione di itinerari gastronomici
-- Confronto tra locali
-- Supporto multilingua (Italiano/Inglese)
-- Tema chiaro/scuro
-- Cronologia conversazioni salvata in locale
+La chiave `MISTRAL_API_KEY` viene usata solo dal server locale (`server/index.mjs`) tramite endpoint `/api/*`.
+Il frontend non contiene la chiave e comunica via proxy Vite verso `http://localhost:8787`.
 
-## Tecnologie
+## Script disponibili
 
-- React + TypeScript
-- Tailwind CSS
-- Mistral AI API
-- Vite
-
-## Build per produzione
-
-```bash
-npm run build
-```
-
-Il risultato sarà nella cartella `dist/`.
+- `npm run dev` avvia frontend Vite + server API locale
+- `npm run build` build frontend di produzione
+- `npm run preview` anteprima della build
 
 ## Note
 
-- Le chat e le impostazioni vengono salvate nel localStorage del browser
-- L'API key non viene mai esposta al client grazie al proxy Vite
+- Chat e impostazioni sono salvate in `localStorage`.
+- In produzione è necessario deployare anche un backend API equivalente a `server/index.mjs`.
