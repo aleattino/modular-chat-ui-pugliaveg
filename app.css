@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "IBM Plex Sans", sans-serif;
+}
+
+body {
+  font-family: "IBM Plex Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-family: inherit;
+}
+
+button, [role="button"], a, summary, select, label[for] {
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes dialogIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes dialogOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.92); }
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dotPulse {
+  0%, 80%, 100% { opacity: 0.2; }
+  40% { opacity: 1; }
+}
+
+@keyframes chipIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes sheetIn {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes sheetOut {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(100%); opacity: 1; }
+}
+
+.modal-panel {
+  animation: dialogIn 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.modal-panel-closing {
+  animation: dialogOut 120ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(0.92);
+  opacity: 0;
+}
+
+@media (max-width: 639px) {
+  .modal-panel {
+    animation: sheetIn 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .modal-panel-closing {
+    animation: sheetOut 200ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(100%);
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 80ms ease-out;
+}
+
+.animate-dialogIn {
+  animation: dialogIn 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-msgIn {
+  animation: msgIn 100ms ease-out;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+.dark ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); }
+.dark ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }

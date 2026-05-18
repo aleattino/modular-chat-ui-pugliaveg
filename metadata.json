@@ -1,0 +1,5 @@
+{
+  "name": "AI Chatbot Demo",
+  "description": "Chatbot AI per la ricerca di attività vegan-friendly. Utilizza un modello conversazionale per aiutare gli utenti a trovare locali basandosi su un database strutturato.",
+  "requestFramePermissions": []
+}
